@@ -1,0 +1,41 @@
+{
+  "author": "Darshan Thimmaiah",
+  "name": "argus",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": "^22.0.0",
+    "npm": ">10.0.0"
+  },
+  "volta": {
+    "node": "22.0.0"
+  },
+  "scripts": {
+    "build": "npm run build -w frontend",
+    "seed": "npm run seed -w backend",
+    "start": "npm run start -w backend",
+    "docker:bootstrap": "docker compose run --rm backend npm i",
+    "docker:seed": "docker compose run --rm backend npm run seed",
+    "docker:up": "docker compose up -d && docker-compose logs -tf",
+    "docker:build": "docker compose run --rm backend npm run build",
+    "docker:logs": "docker compose logs -tf",
+    "docker:down": "docker compose down --remove-orphans",
+    "prepare": "husky || true",
+    "check-updates": "ncu -i -ws",
+    "browserslist-update": "npx update-browserslist-db@latest"
+  },
+  "devDependencies": {
+    "husky": "^9.1.4",
+    "lint-staged": "^15.2.9",
+    "npm-check-updates": "^17.0.6",
+    "prettier": "^3.3.3"
+  },
+  "workspaces": [
+    "./packages/*",
+    "./packages/clients/*"
+  ],
+  "lint-staged": {
+    "*.{js,jsx,css,md,json,yml}": "prettier --write"
+  }
+}

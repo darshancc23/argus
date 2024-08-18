@@ -1,0 +1,16 @@
+{
+  "name": "weather",
+  "type": "module",
+  "scripts": {
+    "start": "node weather.js",
+    "dev": "node --watch --env-file=.env weather.js"
+  },
+  "dependencies": {
+    "base-client": "file:../base-client",
+    "cron": "^3.1.7",
+    "logger": "file:../../logger"
+  },
+  "volta": {
+    "extends": "../../../package.json"
+  }
+}

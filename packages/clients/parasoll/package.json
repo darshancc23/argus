@@ -1,0 +1,17 @@
+{
+  "name": "parasoll",
+  "type": "module",
+  "scripts": {
+    "start": "node parasoll.js",
+    "dev": "node --watch --env-file=.env parasoll.js"
+  },
+  "dependencies": {
+    "base-client": "file:../base-client",
+    "cron": "^3.1.7",
+    "dirigera": "^0.16.1",
+    "logger": "file:../../logger"
+  },
+  "volta": {
+    "extends": "../../../package.json"
+  }
+}

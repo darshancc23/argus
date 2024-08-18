@@ -1,0 +1,40 @@
+# for development purposes
+version: '3.8'
+services:
+  mariadb:
+    image: mariadb:10.5
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: >-
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=argus
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+  backend:
+    image: node:22
+    env_file: .env
+    volumes:
+      - .:/opt/app:delegated
+    working_dir: /opt/app
+    command: npm run dev -w backend
+    ports:
+      - 4000:4000
+    depends_on:
+      - mariadb
+  frontend:
+    image: node:22
+    volumes:
+      - .:/opt/app:delegated
+    working_dir: /opt/app
+    command: npm run start -w frontend
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+    environment:
+      - BACKEND_URL=http://backend:4000
+volumes:
+  mysql_data:
